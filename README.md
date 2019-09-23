@@ -33,4 +33,5 @@ Then create new version of a gem:
 
 ```
 gem build danger-shiphawk-plugin.gemspec
+gem push danger-shiphawk-plugin-xxx.gem
 ```

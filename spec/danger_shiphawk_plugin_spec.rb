@@ -85,7 +85,7 @@ describe Danger::ShiphawkPlugin do
         errors = @dangerfile.status_report[:errors]
 
         expect(errors).to match_array([
-                                        '## Syntax error detected:\\napp.rb\\nUnexpected token'
+                                        "## Syntax error detected: \n app.rb \n Unexpected token"
                                       ])
       end
 
@@ -95,7 +95,7 @@ describe Danger::ShiphawkPlugin do
         errors = @dangerfile.status_report[:errors]
 
         expect(errors).to match_array([
-                                        '## Syntax error detected:\\napp.rb\\nUnexpected token',
+                                        "## Syntax error detected: \n app.rb \n Unexpected token",
                                         '## Please fix rubocop mistakes: `rubocop --auto-correct`'
                                       ])
       end
@@ -107,8 +107,8 @@ describe Danger::ShiphawkPlugin do
 
         expect(warnings.size).to eq(2 + 1)
         expect(warnings).to match_array([
-                                          'Gemfile\\nPrefer single-quoted strings',
-                                          'helper.rb\\nLine is too long. [88/80]',
+                                          "Gemfile \n Prefer single-quoted strings",
+                                          "helper.rb \n Line is too long. [88/80]",
                                           "To locally check these files run: \n `rubocop app.rb Gemfile helper.rb`"
                                         ])
       end
@@ -120,7 +120,7 @@ describe Danger::ShiphawkPlugin do
 
         expect(warnings.size).to eq(1 + 1 + 1)
         expect(warnings).to match_array([
-                                          'Gemfile\\nPrefer single-quoted strings',
+                                          "Gemfile \n Prefer single-quoted strings",
                                           '...And other 1 warnings',
                                           "To locally check these files run: \n `rubocop app.rb Gemfile helper.rb`"
                                         ])

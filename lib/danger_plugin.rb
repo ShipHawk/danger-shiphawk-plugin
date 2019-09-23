@@ -95,11 +95,11 @@ module Danger
 
       wide_report_offenses.each do |offense|
         msg = []
-        msg << '## Syntax error detected:' if offense.serenity == :fail
+        msg << "## Syntax error detected:" if offense.serenity == :fail
         msg << offense.path
         msg << offense.message
 
-        print_message(msg.join('\n'), offense.serenity)
+        print_message(msg.join(" \n "), offense.serenity)
       end
     end
 
