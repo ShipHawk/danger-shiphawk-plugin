@@ -12,7 +12,7 @@ gem 'danger-shiphawk-plugin'
 Inside `Dangerfile` specifying next line
 
 ```ruby
-rubocop.checkup
+shiphawk_plugin.checkup
 ```
 
 #### Options:
