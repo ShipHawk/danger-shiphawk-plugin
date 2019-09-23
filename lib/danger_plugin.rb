@@ -63,8 +63,8 @@ module Danger
 
     def rubocop
       command = ['rubocop']
-      command << ['--format', 'json']
-      command << ['--config', @config.shellescape] if @config
+      command += ['--format', 'json']
+      command += ['--config', @config.shellescape] if @config
 
       `#{command.join(' ')} #{files_to_lint}`
     end
