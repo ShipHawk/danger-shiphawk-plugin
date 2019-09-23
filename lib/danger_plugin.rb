@@ -4,8 +4,21 @@ require 'ostruct'
 require 'shellwords'
 
 module Danger
+  # Run Ruby files through Rubocop.
+  # Results are passed out in a hash with errors/warnings
+  #
+  # @example Specifying custom config file.
+  #
+  #          shiphawk_plugin.checkup
+  #
+  #
+  # @see  ShipHawk/danger-shiphawk-plugin
+  # @tags ruby, rubocop, rubocop-plugin
+  #
   class ShiphawkPlugin < Plugin
-    # @param  [Hash]
+    # Runs Ruby files through Rubocop. Generates a list of errors/warnings
+    #
+    # @param  [Hash] options
     # @return [void]
     def checkup(options = {})
       @files = options.fetch(:files, 'all')

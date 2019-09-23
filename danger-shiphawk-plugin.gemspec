@@ -11,15 +11,20 @@ Gem::Specification.new do |spec|
   spec.email                 = 'dev@shiphawk.com'
   spec.files                 = Dir['README.md', 'LICENSE', 'lib/**/*']
   spec.require_paths         = ['lib']
-  spec.homepage              = 'https://git.shiphawk.com/shiphawk/danger-shiphawk-plugin'
+  spec.homepage              = 'https://github.com/Shiphawk/danger-shiphawk-plugin'
   spec.license               = 'MIT'
   spec.required_ruby_version = '>= 2.2.3'
 
   spec.add_dependency 'danger'
   spec.add_dependency 'rubocop'
 
+  # General ruby development
   spec.add_development_dependency 'bundler', '~> 1.3'
-  spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rake', '~> 10.0'
+
+  # For validating the plugin lints
+  spec.add_development_dependency 'yard'
+
+  spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rspec', '~> 3.4'
 end
