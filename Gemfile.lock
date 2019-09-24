@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    danger-shiphawk-plugin (1.0.4)
+    danger-shiphawk-plugin (1.0.5)
       danger
-      rubocop-shiphawk (~> 1)
+      rubocop
 
 GEM
   remote: https://rubygems.org/
@@ -72,25 +72,20 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.2)
-    rubocop (0.68.1)
+    rubocop (0.74.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
-      parser (>= 2.5, != 2.5.1.1)
+      parser (>= 2.6)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 1.6)
-    rubocop-performance (1.0.0)
-      rubocop (>= 0.58.0)
-    rubocop-shiphawk (1.4.0)
-      rubocop (~> 0.68.1)
-      rubocop-performance (~> 1.0.0)
+      unicode-display_width (>= 1.4.0, < 1.7)
     ruby-progressbar (1.10.1)
     sawyer (0.8.2)
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
-    unicode-display_width (1.5.0)
+    unicode-display_width (1.6.0)
     yard (0.9.20)
 
 PLATFORMS

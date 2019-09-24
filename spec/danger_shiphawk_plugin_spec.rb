@@ -50,14 +50,14 @@ describe Danger::ShiphawkPlugin do
     context 'rubocop launch' do
       it 'with format only' do
         expect_any_instance_of(described_class).to receive(:`)
-          .with('rubocop --format json .').and_return(rubocop_response_blank)
+          .with('bundle exec rubocop --format json .').and_return(rubocop_response_blank)
 
         @shiphawk_plugin.checkup
       end
 
       it 'with config-file' do
         expect_any_instance_of(described_class).to receive(:`)
-          .with('rubocop --format json --config hello.txt .').and_return(rubocop_response_blank)
+          .with('bundle exec rubocop --format json --config hello.txt .').and_return(rubocop_response_blank)
 
         @shiphawk_plugin.checkup(config: 'hello.txt')
       end
@@ -67,7 +67,7 @@ describe Danger::ShiphawkPlugin do
         expect(@shiphawk_plugin.git).to receive(:added_files).and_return(['log/temp.rb'])
 
         expect_any_instance_of(described_class).to receive(:`)
-          .with('rubocop --format json temp.rb log/temp.rb').and_return(rubocop_response_blank)
+          .with('bundle exec rubocop --format json temp.rb log/temp.rb').and_return(rubocop_response_blank)
 
         @shiphawk_plugin.checkup(files: 'diff')
       end
@@ -76,11 +76,11 @@ describe Danger::ShiphawkPlugin do
     context 'offenses' do
       before do
         expect_any_instance_of(described_class).to receive(:`)
-          .with('rubocop --format json .').and_return(rubocop_response_with_errors)
+          .with('bundle exec rubocop --format json .').and_return(rubocop_response_with_errors)
       end
 
       it 'check errors messages' do
-        @shiphawk_plugin.checkup(autofix_count: 0)
+        @shiphawk_plugin.checkup(autofix_hint_threshold: 30)
 
         errors = @dangerfile.status_report[:errors]
 
@@ -90,7 +90,7 @@ describe Danger::ShiphawkPlugin do
       end
 
       it 'check autofix error message' do
-        @shiphawk_plugin.checkup
+        @shiphawk_plugin.checkup(autofix_hint_threshold: 0)
 
         errors = @dangerfile.status_report[:errors]
 
