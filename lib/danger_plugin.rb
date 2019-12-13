@@ -24,7 +24,7 @@ module Danger
       @files = options.fetch(:files, 'all')
       @config = options.fetch(:config, nil)
       @limit_of_warnings = options.fetch(:limit_of_warnings, 10)
-      @autofix_hint_threshold = options.fetch(:autofix_hint_threshold, 0)
+      @autofix_hint_threshold = options.fetch(:autofix_hint_threshold, 50)
 
       return if offenses.empty?
 
@@ -85,7 +85,7 @@ module Danger
 
     def message_autofix
       return if offenses.empty?
-      return if @autofix_hint_threshold > offenses.size
+      return if offenses.size > @autofix_hint_threshold
 
       msg = '## Please fix rubocop mistakes: `rubocop --auto-correct`'
       print_message(msg, :fail)

@@ -80,12 +80,24 @@ describe Danger::ShiphawkPlugin do
       end
 
       it 'check errors messages' do
-        @shiphawk_plugin.checkup(autofix_hint_threshold: 30)
+        @shiphawk_plugin.checkup
 
         errors = @dangerfile.status_report[:errors]
 
         expect(errors).to match_array([
-                                        "## Syntax error detected: \n app.rb \n Unexpected token"
+                                        "## Syntax error detected: \n app.rb \n Unexpected token",
+                                        '## Please fix rubocop mistakes: `rubocop --auto-correct`'
+                                      ])
+      end
+
+      it 'check errors messages' do
+        @shiphawk_plugin.checkup(autofix_hint_threshold: 50)
+
+        errors = @dangerfile.status_report[:errors]
+
+        expect(errors).to match_array([
+                                        "## Syntax error detected: \n app.rb \n Unexpected token",
+                                        '## Please fix rubocop mistakes: `rubocop --auto-correct`'
                                       ])
       end
 
@@ -96,7 +108,6 @@ describe Danger::ShiphawkPlugin do
 
         expect(errors).to match_array([
                                         "## Syntax error detected: \n app.rb \n Unexpected token",
-                                        '## Please fix rubocop mistakes: `rubocop --auto-correct`'
                                       ])
       end
 

@@ -22,7 +22,7 @@ The following keys are supported:
 * `files: 'all'` ('all' | 'diff') Files to lint
 * `config: nil` Path to the config `.rubocop.yml` file
 * `limit_of_warnings: 10` (Number) Count of offenses that should be displayed
-* `autofix_hint_threshold: 0` (Number) Rubocop auto-fix message will appear when errors count more then this number
+* `autofix_hint_threshold: 50` (Number) Rubocop auto-fix message will appear when errors count more then this number
 
 ## License:
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
