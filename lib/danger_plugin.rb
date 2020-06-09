@@ -64,6 +64,7 @@ module Danger
     def rubocop
       command = ['bundle', 'exec']
       command += ['rubocop']
+      command += ['--force-exclusion']
       command += ['--format', 'json']
       command += ['--config', @config.shellescape] if @config
 
