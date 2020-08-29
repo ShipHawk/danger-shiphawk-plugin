@@ -43,9 +43,12 @@ module Danger
     end
 
     def detect_offenses
-      rubocop_output = json_parse(rubocop)
+      files_string = files_to_lint
 
-      all_offenses = rubocop_output.files.flat_map do |file|
+      return [] if files_string.empty?
+      rubocop_output = call_rubocop(files_string)
+
+      all_offenses = json_parse(rubocop_output).files.flat_map do |file|
         offenses = file.offenses
         next [] if offenses.empty?
 
@@ -61,14 +64,14 @@ module Danger
       all_offenses.sort_by(&:serenity)
     end
 
-    def rubocop
+    def call_rubocop(files_string)
       command = ['bundle', 'exec']
       command += ['rubocop']
       command += ['--force-exclusion']
       command += ['--format', 'json']
       command += ['--config', @config.shellescape] if @config
 
-      `#{command.join(' ')} #{files_to_lint}`
+      `#{command.join(' ')} #{files_string}`
     end
 
     def files_to_lint

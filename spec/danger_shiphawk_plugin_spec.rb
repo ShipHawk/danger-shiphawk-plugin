@@ -50,14 +50,14 @@ describe Danger::ShiphawkPlugin do
     context 'rubocop launch' do
       it 'with format only' do
         expect_any_instance_of(described_class).to receive(:`)
-          .with('bundle exec rubocop --format json .').and_return(rubocop_response_blank)
+          .with('bundle exec rubocop --force-exclusion --format json .').and_return(rubocop_response_blank)
 
         @shiphawk_plugin.checkup
       end
 
       it 'with config-file' do
         expect_any_instance_of(described_class).to receive(:`)
-          .with('bundle exec rubocop --format json --config hello.txt .').and_return(rubocop_response_blank)
+          .with('bundle exec rubocop --force-exclusion --format json --config hello.txt .').and_return(rubocop_response_blank)
 
         @shiphawk_plugin.checkup(config: 'hello.txt')
       end
@@ -67,7 +67,16 @@ describe Danger::ShiphawkPlugin do
         expect(@shiphawk_plugin.git).to receive(:added_files).and_return(['log/temp.rb'])
 
         expect_any_instance_of(described_class).to receive(:`)
-          .with('bundle exec rubocop --format json temp.rb log/temp.rb').and_return(rubocop_response_blank)
+          .with('bundle exec rubocop --force-exclusion --format json temp.rb log/temp.rb').and_return(rubocop_response_blank)
+
+        @shiphawk_plugin.checkup(files: 'diff')
+      end
+
+      it 'has no diff' do
+        expect(@shiphawk_plugin.git).to receive(:modified_files).and_return([])
+        expect(@shiphawk_plugin.git).to receive(:added_files).and_return([])
+
+        expect_any_instance_of(described_class).to_not receive(:`)
 
         @shiphawk_plugin.checkup(files: 'diff')
       end
@@ -76,7 +85,7 @@ describe Danger::ShiphawkPlugin do
     context 'offenses' do
       before do
         expect_any_instance_of(described_class).to receive(:`)
-          .with('bundle exec rubocop --format json .').and_return(rubocop_response_with_errors)
+          .with('bundle exec rubocop --force-exclusion --format json .').and_return(rubocop_response_with_errors)
       end
 
       it 'check errors messages' do
