@@ -71,6 +71,15 @@ describe Danger::ShiphawkPlugin do
 
         @shiphawk_plugin.checkup(files: 'diff')
       end
+
+      it 'has no diff' do
+        expect(@shiphawk_plugin.git).to receive(:modified_files).and_return([])
+        expect(@shiphawk_plugin.git).to receive(:added_files).and_return([])
+
+        expect_any_instance_of(described_class).to_not receive(:`)
+
+        @shiphawk_plugin.checkup(files: 'diff')
+      end
     end
 
     context 'offenses' do
